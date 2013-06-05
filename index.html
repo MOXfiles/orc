@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Orc by Distrotech</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Orc</h1>
+          <h2>Mirror of git://anongit.freedesktop.org/gstreamer/orc</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/Distrotech/orc/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/Distrotech/orc/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/Distrotech/orc" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="orc---the-oil-runtime-compiler" class="anchor" href="#orc---the-oil-runtime-compiler"><span class="octicon octicon-link"></span></a>ORC - The Oil Runtime Compiler</h1>
+
+<p>(and OIL stands for Optimized Inner Loops)</p>
+
+<p>Entropy Wave Inc (<a href="http://entropywave.com/">http://entropywave.com/</a>) presents Orc, the sucessor
+to Liboil - The Library of Optimized Inner Loops.</p>
+
+<p>Orc is a library and set of tools for compiling and executing
+very simple programs that operate on arrays of data.  The "language"
+is a generic assembly language that represents many of the features
+available in SIMD architectures, including saturated addition and
+subtraction, and many arithmetic operations.</p>
+
+<p>At this point, developers interested in using Orc should look at the
+examples and try out a few Orc programs in an experimental branch
+of their own projects.  And provide feedback on how it works.  There
+will likely be some major changes in ease of use from a developer's
+perspective over the next few releases.</p>
+
+<p>The 0.4 series of Orc releases will be API and ABI compatible, and
+will be incompatible with the 0.5 series when it comes out.  The first
+release of the 0.5 series is anticipated to coincide with the release
+of GStreamer 1.0.</p>
+
+<p>Features:</p>
+
+<ul>
+<li><p>Users can create, compile, and run simple programs that use the
+vector extensions of the CPU, all directly from an application.</p></li>
+<li><p>Users can compile Orc programs to assembly source code to be
+compiled and used without linking against the Orc library.</p></li>
+<li><p>The generic assembly language can be extended by an application
+by adding new opcodes.</p></li>
+<li><p>An application can add rules for converting existing or new opcodes
+to binary code for a specific target.</p></li>
+<li><p>Current targets: SSE, MMX, MIPS, Altivec, NEON, and TI C64x+.
+(The c64x target only produces source code.)</p></li>
+<li><p>Programs can optionally be emulated, which is useful for testing, or
+if no rules are available to convert Orc opcodes to executable code.</p></li>
+</ul><p>More information:</p>
+
+<p>Web: <a href="http://code.entropywave.com/projects/orc/">http://code.entropywave.com/projects/orc/</a>
+  Download: <a href="http://code.entropywave.com/download/orc/">http://code.entropywave.com/download/orc/</a></p>
+
+<p>Questions and Answers:</p>
+
+<ul>
+<li>
+<p>Q: Why not let gcc vectorize my code?</p>
+
+<p>A: Two reasons: first, since Orc's assembly language is much more
+restrictive than C, Orc can generate better code than gcc, and
+second, Orc can generate code for functions you define at runtime.
+Many algorithms require gluing together several stages of operations,
+and if each stage has several options, the total amount of code to
+cover all combinations could be inconveniently large.</p>
+</li>
+<li>
+<p>Q: Why not use compiler intrinsics for SIMD code?</p>
+
+<p>A: Compiler intrinsics only work for one target, and need to be
+hand written.  Plus, some compilers are very picky about source
+code that uses intrinsics, and will silently produce slow code.
+And, of course, you can't compile intrinsics at runtime.</p>
+</li>
+<li>
+<p>Q: How big is the Orc library?</p>
+
+<p>A: For embedded users, the --enable-backend configure option can
+be used to disable irrelvant targets.  Compiled with only one target
+(SSE), the library size is about 150 kB uncompressed, or 48 kB
+compressed.  The goal was to keep the uncompressed size under
+about 100 kB (but that failed!).  A typical build with all targets
+and the full ABI is around 350 kB.</p>
+</li>
+</ul><p>Caveats (Known Bugs):</p>
+
+<ul>
+<li>?</li>
+</ul><p>Future directions:</p>
+
+<ul>
+<li><p>Addition of more complex loop control and array structures.</p></li>
+<li><p>Addition of an option to compile the Orc library with only the
+runtime features for a single target, e.g., for embedded systems.</p></li>
+<li><p>Addition of rewrite rules, which convert an instruction that cannot
+be converted to binary code into a series of instructions that can.
+This is necessary since assembly instructions on most targets do
+not cover all the features of the Orc assembly language.</p></li>
+</ul><p>About Entropy Wave:</p>
+
+<p>Entropy Wave creates tools that allow content producers and distributors
+use open video technology.  Through use of open source software like
+GStreamer and Dirac, Entropy Wave's customers save money on licensing
+costs for encoding and streaming video on the web.  Entropy Wave was
+founded in 2008 by long-time open source developer David Schleef.</p>
+        </section>
+
+        <footer>
+          Orc is maintained by <a href="https://github.com/Distrotech">Distrotech</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
