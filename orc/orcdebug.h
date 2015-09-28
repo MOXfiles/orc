@@ -154,6 +154,8 @@ void _orc_debug_init (void);
 void orc_debug_print (int level, const char *file, const char *func,
     int line, const char *format, ...);
 
+extern int _orc_compiler_flag_debug;
+
 ORC_END_DECLS
 
 #endif

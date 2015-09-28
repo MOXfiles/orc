@@ -44,7 +44,6 @@
 #include <signal.h>
 #include <time.h>
 
-
 orc_uint32 orc_x86_vendor;
 int orc_x86_sse_flags;
 int orc_x86_mmx_flags;
@@ -68,7 +67,11 @@ get_cpuid_ecx (orc_uint32 op, orc_uint32 init_ecx, orc_uint32 *a, orc_uint32 *b,
 {
 #if _MSC_VER >= 1500
   int tmp[4];
+#if _MSC_VER == 1500 && _M_AMD64
+  __cpuid(tmp, op);
+#else
   __cpuidex(tmp, op, init_ecx);
+#endif
   *a = tmp[0];
   *b = tmp[1];
   *c = tmp[2];
